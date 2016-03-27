@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.widget.Toast;
 
+import com.cristhian.jokes.JokeListener;
 import com.example.cristhian.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -16,6 +17,11 @@ import java.io.IOException;
 public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private JokeListener jokeListener;
+
+    public EndpointsAsyncTask(JokeListener jokeListener) {
+        this.jokeListener = jokeListener;
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -47,5 +53,6 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        jokeListener.onResponseSuccesfull(result);
     }
 }
