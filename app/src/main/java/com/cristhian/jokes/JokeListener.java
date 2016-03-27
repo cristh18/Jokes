@@ -5,5 +5,5 @@ package com.cristhian.jokes;
  */
 public interface JokeListener {
 
-    void onResponseSuccesfull(String response);
+    void onResponseSuccessful(String response);
 }

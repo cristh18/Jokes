@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements JokeListener {
         AdView mAdView = (AdView) findViewById(R.id.ad_view);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
     }
 
 
@@ -49,10 +47,11 @@ public class MainActivity extends AppCompatActivity implements JokeListener {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * @param view
-     */
-    public void launchJokeDisplayLibActivity(View view) {
+    public void getJoke(View view){
+        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
+    }
+
+    private void launchJokeDisplayLibActivity() {
         Intent intent = new Intent(this, JokeDisplayActivity.class);
         Bundle mBundle = new Bundle();
         mBundle.putString("joke", mJoke);
@@ -61,9 +60,10 @@ public class MainActivity extends AppCompatActivity implements JokeListener {
     }
 
     @Override
-    public void onResponseSuccesfull(String response) {
+    public void onResponseSuccessful(String response) {
         if (!TextUtils.isEmpty(response)) {
             mJoke = response;
+            launchJokeDisplayLibActivity();
         } else {
             mJoke = new String("");
         }
