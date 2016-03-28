@@ -12,8 +12,6 @@ import android.view.View;
 
 import com.cristhian.jokedisplay.JokeDisplayActivity;
 import com.cristhian.jokes.network.EndpointsAsyncTask;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 
 public class MainActivity extends AppCompatActivity implements JokeListener {
@@ -24,10 +22,6 @@ public class MainActivity extends AppCompatActivity implements JokeListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AdView mAdView = (AdView) findViewById(R.id.ad_view);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
 
@@ -47,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements JokeListener {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getJoke(View view){
+    public void getJoke(View view) {
         new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
     }
 
